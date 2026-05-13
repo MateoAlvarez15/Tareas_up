@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  student
+  tutor
+  admin
+}
+
+model User {
+  id       String @id @default(uuid())
+  name     String
+  email    String @unique
+  password String
+  role     Role
+  status   String @default("active")
+
+  personalTasks PersonalTask[]
+  groupTasks    GroupTask[]
+  assignments   Assignment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PersonalTask {
+  id          String    @id @default(uuid())
+  title       String
+  description String
+  dueDate     DateTime?
+  dueTime     String?
+  priority    String    @default("medium")
+  completed   Boolean   @default(false)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model GroupTask {
+  id          String    @id @default(uuid())
+  title       String
+  description String
+  dueDate     DateTime?
+  dueTime     String?
+  priority    String    @default("medium")
+
+  tutorId String
+  tutor   User   @relation(fields: [tutorId], references: [id], onDelete: Cascade)
+
+  assignments Assignment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Assignment {
+  id String @id @default(uuid())
+
+  taskId    String
+  userId    String
+  submitted Boolean @default(false)
+
+  task GroupTask @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([taskId, userId])
+}
