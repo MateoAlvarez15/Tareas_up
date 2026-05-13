@@ -1,5 +1,18 @@
-node_modules
-# Keep environment variables out of version control
-.env
+# Dependencies
+node_modules/
 
-/lib/generated/prisma
+# Next.js
+.next/
+out/
+
+# Environment (CRÍTICO - nunca subir)
+.env
+.env.local
+.env*.local
+
+# Prisma generated
+lib/generated/
+
+# Logs
+*.log
+npm-debug.log*
