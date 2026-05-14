@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/USUARIO/Downloads/TODO/use-case-diagram1/lib/prisma.ts"],"sourcesContent":["import { PrismaClient } from '../lib/generated/prisma'\r\nimport { PrismaPg } from '@prisma/adapter-pg'\r\n\r\nconst globalForPrisma = globalThis as unknown as {\r\n  prisma: PrismaClient | undefined\r\n}\r\n\r\nfunction createPrismaClient() {\r\n  const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! })\r\n  return new PrismaClient({ adapter })\r\n}\r\n\r\nexport const prisma = globalForPrisma.prisma ?? createPrismaClient()\r\n\r\nif (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma"],"names":[],"mappings":";;;;AAAA;AACA;;;;;;;AAEA,MAAM,kBAAkB;AAIxB,SAAS;IACP,MAAM,UAAU,IAAI,yKAAQ,CAAC;QAAE,kBAAkB,QAAQ,GAAG,CAAC,YAAY;IAAE;IAC3E,OAAO,IAAI,qJAAY,CAAC;QAAE;IAAQ;AACpC;AAEO,MAAM,SAAS,gBAAgB,MAAM,IAAI;AAEhD,wCAA2C,gBAAgB,MAAM,GAAG"}}]
-}

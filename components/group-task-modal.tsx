@@ -133,6 +133,7 @@ export default function GroupTaskModal({ isOpen, onClose, teacherEmail }: GroupT
       priority,
       createdBy: teacherEmail,
       assignedTo: selectedStudents,
+      subscriptions: [],
     }
 
     addGroupTask(taskData)

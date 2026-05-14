@@ -110,13 +110,17 @@ export default function TaskModal({ isOpen, onClose, editingTask }: TaskModalPro
     if (!validateForm()) return
 
     const taskData = {
-      title: title.trim(),
-      description: description.trim(),
-      dueDate,
-      dueTime,
-      priority,
-      completed: false,
-    }
+    title,
+    description,
+    dueDate,
+    dueTime,
+    priority,
+    completed: false,
+
+    createdBy: "",
+    assignedTo: [],
+    subscriptions: [],
+  }
 
     if (editingTask) {
       updateTask(editingTask.id, taskData)
